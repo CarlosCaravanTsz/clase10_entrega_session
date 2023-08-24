@@ -28,8 +28,13 @@ function auth(req, res, next) {
 // Profile para mostrar una vez autenticado
 router.get("/profile", auth, (req, res) => {
   const user = req.session.user;
-  console.log('PROBANDO OBJETO USER DE SESSION: ', user);
   res.render("index", { user });
+});
+
+//Logout
+router.get('/logout', (req, res) => {
+  if (req.session) req.session.destroy();
+  return res.redirect('/')
 });
 
 
@@ -65,15 +70,18 @@ router.get('/products', async (req, res) => {
       ? `/products?page=${result.nextPage}&limit=${limit}`
     : "";
   
-  console.log(result)
-
     //res.render("products_catalog", { products });
     res.render("products_catalog", result);
 });
 
+function isAdmin(req, res, next) {
+
+  req?.session?.user?.role === "admin" ? next() : res.status(401).redirect('/profile')
+}
+
 
 // Edit Product Catalog OK
-router.get('/edit-products', async (req, res) => {
+router.get('/edit-products', isAdmin, async (req, res) => {
     const products = await productModel.find().lean();
     res.render('edit_products', { products })
 });

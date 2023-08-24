@@ -743,3 +743,21 @@ select.form-control {
     letter-spacing: 2px;
 
 }
+
+.carrito  {
+    margin-left: 75vw;
+}
+
+.logout_container {
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: none;
+    font-size: 1.4rem;
+}
+
+.logout {
+    margin-right: 50px;
+    
+}
+

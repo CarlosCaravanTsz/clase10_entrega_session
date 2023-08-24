@@ -18,8 +18,6 @@ router.post("/", async (req, res) => {
 });
 
 
-//TODO: Agregar boton para LOG OUT y destruir la sesion: agregar manual e independiente a INDEX y PRODUCTS_CATALOG
-
 router.post("/register", async (req, res) => {
     const user = req.body;
 
@@ -32,7 +30,6 @@ router.post("/register", async (req, res) => {
         return res.redirect('/register');
     }
 
-    console.log('USER: ', user, 'USERS: ', users)
     user.user_id = add_id(users);
     user.role = 'user';
     await userModel.create(user);
