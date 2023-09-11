@@ -26,9 +26,7 @@ router.post("/register", async (req, res) => {
     const email = user.email
 
     const existUser = await userModel.findOne({ email });
-    console.log("CORREO", email);
 
-    console.log("REGISTER EXISTUSER", typeof existUser);
 
     if(existUser) {
         console.log("Ya existe un usuario registrado con ese correo");
